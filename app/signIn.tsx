@@ -7,8 +7,10 @@ import CustomInput from "@/components/Input";
 import Loading from "@/components/Loading";
 import { validatorEmailAndPassword } from "@/utils/validator";
 import CustomKeyboardView from "@/components/Keyboard";
+import { useAuth } from "@/context/authContext";
 
 export default function SignIn() {
+  const { login } = useAuth();
   const router = useRouter();
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -16,6 +18,16 @@ export default function SignIn() {
 
   const onLogin = async () => {
     validatorEmailAndPassword(emailRef.current, passwordRef.current);
+
+    setLoading(true);
+
+    const response = await login(emailRef.current, passwordRef.current);
+
+    setLoading(false);
+
+    if (!response.success) {
+      Alert.alert("Erro ao entrar na conta", response.msg);
+    }
   };
 
   return (

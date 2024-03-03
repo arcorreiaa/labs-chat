@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Image, Pressable, StatusBar, Text, View } from "react-native";
+import { Alert, Image, Pressable, StatusBar, Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import CustomButton from "@/components/Button";
 import { useRouter } from "expo-router";
@@ -8,9 +8,11 @@ import Loading from "@/components/Loading";
 import { validatorRegister } from "@/utils/validator";
 import { Feather } from "@expo/vector-icons";
 import CustomKeyboardView from "@/components/Keyboard";
+import { useAuth } from "@/context/authContext";
 
 export default function SignUp() {
   const router = useRouter();
+  const { register } = useAuth();
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -26,6 +28,21 @@ export default function SignUp() {
       userNameRef.current,
       profileRef.current
     );
+    setLoading(true);
+
+    let response = await register(
+      emailRef.current,
+      passwordRef.current,
+      userNameRef.current,
+      profileRef.current
+    );
+
+    setLoading(false);
+    console.log("resultado: ", response);
+
+    if (!response.success) {
+      Alert.alert("Erro ao criar conta", response.msg);
+    }
   };
 
   return (
