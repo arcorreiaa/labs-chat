@@ -1,0 +1,32 @@
+import React from "react";
+import { FlatList, Text, View } from "react-native";
+import ChatItem from "../ChatItem";
+import { useRouter } from "expo-router";
+import { IUser } from "@/types/user";
+
+interface IChatListProps {
+  users: IUser[];
+}
+
+export default function ChatList({ users }: IChatListProps) {
+  const router = useRouter();
+  return (
+    <View className="flex-1">
+      <FlatList
+        data={users}
+        contentContainerStyle={{ flex: 1, paddingVertical: 25 }}
+        // keyExtractor={(item) => Math.random()}
+        keyExtractor={(item, index) => index.toString()}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item, index }) => (
+          <ChatItem
+            router={router}
+            noBorder={index + 1 === users.length}
+            item={item}
+            index={index}
+          />
+        )}
+      />
+    </View>
+  );
+}
