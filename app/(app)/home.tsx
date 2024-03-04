@@ -6,11 +6,10 @@ import { IUser } from "@/types/user";
 import { StatusBar } from "expo-status-bar";
 import { getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Text, View } from "react-native";
+import { View } from "react-native";
 
 export default function Home() {
   const { user } = useAuth();
-  // const [users, setUsers] = useState([]);
   const [users, setUsers] = useState<IUser[]>([]);
 
   useEffect(() => {
