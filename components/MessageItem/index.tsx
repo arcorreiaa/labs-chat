@@ -24,7 +24,7 @@ export default function MessageItem({
   } else {
     return (
       <View style={{ width: 350 }} className="ml-3 mb-3">
-        <View className="flex self-start p-3 px-4 rounded-2xl bg-indigo-100 border border-indigo-200">
+        <View className="flex self-start p-3 px-4 rounded-2xl bg-[#caf4dd] border border-[#6bd49e]">
           <Text style={{ fontSize: 14 }}>{message?.text}</Text>
         </View>
       </View>

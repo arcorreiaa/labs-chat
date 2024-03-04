@@ -3,6 +3,7 @@ import { Alert, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { Router, Stack } from "expo-router";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { handleUnavailable } from "@/utils/commons";
 
 interface IChatRoomHeader {
   useItem: unknown;
@@ -10,17 +11,16 @@ interface IChatRoomHeader {
 }
 
 export default function ChatRoomHeader({ router, useItem }: IChatRoomHeader) {
-  const onCall = () => {
-    Alert.alert("Função não disponivel");
-  };
-
   return (
     <Stack.Screen
       options={{
         title: "",
+        headerStyle: {
+          backgroundColor: "#f5f7f6",
+        },
         headerShadowVisible: false,
         headerLeft: () => (
-          <View className="flex-row items-center gap-4">
+          <View className="flex-row items-center gap-4 ">
             <TouchableOpacity onPress={() => router.back()}>
               <Entypo name="chevron-left" size={30} color={"#737373"} />
             </TouchableOpacity>
@@ -42,11 +42,11 @@ export default function ChatRoomHeader({ router, useItem }: IChatRoomHeader) {
 
         headerRight: () => (
           <View className="flex-row items-center gap-8">
-            <Pressable onPress={onCall}>
+            <Pressable onPress={handleUnavailable}>
               <Ionicons name="call" size={20} color={"#737373"} />
             </Pressable>
 
-            <Pressable onPress={onCall}>
+            <Pressable onPress={handleUnavailable}>
               <Ionicons name="videocam" size={20} color={"#737373"} />
             </Pressable>
           </View>

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Alert, Image, Pressable, StatusBar, Text, View } from "react-native";
+import { Alert, Image, Pressable, Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import CustomButton from "@/components/Button";
 import { useRouter } from "expo-router";
@@ -8,6 +8,8 @@ import Loading from "@/components/Loading";
 import { validatorEmailAndPassword } from "@/utils/validator";
 import CustomKeyboardView from "@/components/Keyboard";
 import { useAuth } from "@/context/authContext";
+import { handleUnavailable } from "@/utils/commons";
+import { StatusBar } from "expo-status-bar";
 
 export default function SignIn() {
   const { login } = useAuth();
@@ -32,17 +34,17 @@ export default function SignIn() {
 
   return (
     <CustomKeyboardView>
-      <StatusBar barStyle={"dark-content"} />
+      <StatusBar style="dark" />
 
       <View
         className="flex-1 gap-12"
         style={{ paddingTop: 16, paddingHorizontal: 10 }}
       >
-        <View className="items-center flex">
+        <View className="items-center flex mt-10">
           <Image
-            style={{ height: 300, width: 200 }}
+            style={{ height: 300, width: 400 }}
             resizeMode="contain"
-            source={require("../assets/images//login.png")}
+            source={require("../assets/images//login2.jpeg")}
           />
         </View>
 
@@ -65,9 +67,11 @@ export default function SignIn() {
                 icon={<Octicons name="lock" size={20} color="gray" />}
                 isPassword={true}
               />
-              <Text className="font-semibold text-right text-[12px] text-neutral-500">
-                Esqueceu a senha?
-              </Text>
+              <Pressable onPress={handleUnavailable}>
+                <Text className="font-semibold text-right text-[12px] text-neutral-500">
+                  Esqueceu a senha?
+                </Text>
+              </Pressable>
             </View>
 
             <View>
@@ -86,7 +90,7 @@ export default function SignIn() {
               </Text>
 
               <Pressable onPress={() => router.push("/signUp")}>
-                <Text className="font-bold text-indigo-500 text-[12px]">
+                <Text className="font-bold  text-[#3ebb7a] text-[12px]">
                   Criar conta
                 </Text>
               </Pressable>

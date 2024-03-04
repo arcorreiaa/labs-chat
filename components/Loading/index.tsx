@@ -12,7 +12,7 @@ export default function Loading({ size }: ILoadingProps) {
     <View style={{ height: size, aspectRatio: 1 }}>
       <LottieView
         style={{ flex: 1 }}
-        source={require("../../assets/images/loading.json")}
+        source={require("../../assets/images/loading2.json")}
         autoPlay
         loop
       />

@@ -1,45 +1,47 @@
 import { onIphone } from "@/utils/device";
 import React from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Image } from "expo-image";
-import { blurhash } from "@/utils/commons";
+import { blurhash, defaultImage, handleUnavailable } from "@/utils/commons";
 import { useAuth } from "@/context/authContext";
 import { Menu, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import CustomMenuItems from "../Menu";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import Separator from "../Separator";
 
 export default function HomeHeader() {
   const { top } = useSafeAreaInsets();
-  const defaultProfileImageUrl = "https://picsum.photos/seed/696/3000/2000";
   const { user, logout } = useAuth();
-
-  const handleProfile = () => {
-    Alert.alert("Tela ainda não disponivel");
-  };
 
   const onLogout = async () => {
     await logout();
   };
 
+  const credit = () => {
+    Alert.alert("Credito:  @arcoofc");
+  };
+
   return (
     <View
-      className="flex-row justify-between px-5 bg-indigo-400 pb-6 rounded-b-3xl shadow "
+      className="flex-row justify-between px-5 bg-[#6bd49e]  pb-6  shadow "
       style={{ paddingTop: onIphone ? top : top + 10 }}
     >
-      <Text style={{ fontSize: 22 }} className="font-medium text-white">
-        Bate Papo
-      </Text>
+      <Pressable onPress={credit}>
+        <Text style={{ fontSize: 22 }} className="font-medium text-white">
+          Chat dos amigos
+        </Text>
+      </Pressable>
 
       <View>
-        <Menu>
+        <Menu style={{ flexDirection: "row", gap: 15, alignItems: "center" }}>
+          <Pressable onPress={handleUnavailable}>
+            <Ionicons name="person-add" size={20} color={"darkgreen"} />
+          </Pressable>
           <MenuTrigger>
             <Image
               style={{ height: 35, aspectRatio: 1, borderRadius: 100 }}
-              source={
-                user?.profileUrl ? user?.profileUrl : defaultProfileImageUrl
-              }
+              source={user?.profileUrl ? user?.profileUrl : defaultImage}
               placeholder={blurhash}
               transition={500}
             />
@@ -60,7 +62,7 @@ export default function HomeHeader() {
           >
             <CustomMenuItems
               title="Perfil"
-              action={handleProfile}
+              action={handleUnavailable}
               value={null}
               icon={<Feather name="user" size={20} color="#737373" />}
             />

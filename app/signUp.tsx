@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Alert, Image, Pressable, StatusBar, Text, View } from "react-native";
+import { Alert, Image, Pressable, Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import CustomButton from "@/components/Button";
 import { useRouter } from "expo-router";
@@ -9,6 +9,7 @@ import { validatorRegister } from "@/utils/validator";
 import { Feather } from "@expo/vector-icons";
 import CustomKeyboardView from "@/components/Keyboard";
 import { useAuth } from "@/context/authContext";
+import { StatusBar } from "expo-status-bar";
 
 export default function SignUp() {
   const router = useRouter();
@@ -47,17 +48,17 @@ export default function SignUp() {
 
   return (
     <CustomKeyboardView className="flex-1">
-      <StatusBar barStyle={"dark-content"} />
+      <StatusBar style="dark" />
 
       <View
         className="flex-1 gap-12"
         style={{ paddingTop: 16, paddingHorizontal: 10 }}
       >
-        <View className="items-center flex">
+        <View className="items-center flex mt-10">
           <Image
-            style={{ height: 300, width: 200 }}
+            style={{ height: 300, width: 380 }}
             resizeMode="contain"
-            source={require("../assets/images//register.png")}
+            source={require("../assets/images//register2.jpeg")}
           />
         </View>
 
@@ -110,7 +111,7 @@ export default function SignUp() {
               </Text>
 
               <Pressable onPress={() => router.push("/signIn")}>
-                <Text className="font-bold text-indigo-500 text-[12px]">
+                <Text className="font-bold text-[#3ebb7a] text-[12px]">
                   Entrar
                 </Text>
               </Pressable>

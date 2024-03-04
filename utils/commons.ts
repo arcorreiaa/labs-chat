@@ -1,3 +1,5 @@
+import { Alert } from "react-native";
+
 export const blurhash =
   "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
@@ -31,3 +33,10 @@ export const formatDate = (date: Date) => {
   var formattedDate = day + " " + month;
   return formattedDate;
 };
+
+export const handleUnavailable = () => {
+  Alert.alert("Tela ainda não disponivel");
+};
+
+export const defaultImage =
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/1200px-Avatar_icon_green.svg.png";

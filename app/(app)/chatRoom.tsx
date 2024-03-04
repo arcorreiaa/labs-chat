@@ -112,7 +112,7 @@ export default function ChatRoom({}: IChatRoomProps) {
 
   return (
     <CustomKeyboardView inChat={true}>
-      <View className="flex-1 bg-white">
+      <View className="flex-1 bg-[#f5f7f6] ">
         <StatusBar style="dark" />
         <ChatRoomHeader useItem={useItem} router={router} />
 
@@ -133,13 +133,25 @@ export default function ChatRoom({}: IChatRoomProps) {
                 ref={inputRef}
                 onChangeText={(value) => (textRef.current = value)}
                 placeholder="Mensagem..."
-                style={{ fontSize: 16 }}
+                style={{
+                  fontSize: 16,
+                  flex: 1,
+                  marginRight: 2,
+                  textAlignVertical: "top",
+                }}
                 className="flex-1 mr-2"
+                multiline={true}
               />
 
               <TouchableOpacity
+                style={{
+                  width: 35,
+                  height: 35,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
                 onPress={sendMessage}
-                className="bg-neutral-200 p-2 mr-[1px] rounded-full"
+                className="bg-[#caf4dd] p-2 mr-[1px] rounded-full "
               >
                 <Feather name="send" size={20} color={"#737373"} />
               </TouchableOpacity>

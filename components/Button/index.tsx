@@ -9,7 +9,7 @@ export default function CustomButton({ title, ...rest }: ICustomButtonProps) {
   return (
     <TouchableOpacity
       {...rest}
-      className="bg-indigo-500 rounded-xl justify-center items-center h-14"
+      className="bg-[#6bd49e] rounded-xl justify-center items-center h-14"
     >
       <Text className="text-white font-bold tracking-wider text-[18px]">
         {title}
