@@ -35,7 +35,7 @@ export default function Home() {
       <StatusBar style="light" />
 
       {users.length > 0 ? (
-        <ChatList users={users} />
+        <ChatList currentUser={user} users={users} />
       ) : (
         <View className="flex items-center justify-center h-full ">
           <Loading size={60} />

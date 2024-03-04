@@ -6,9 +6,10 @@ import { IUser } from "@/types/user";
 
 interface IChatListProps {
   users: IUser[];
+  currentUser: [];
 }
 
-export default function ChatList({ users }: IChatListProps) {
+export default function ChatList({ users, currentUser }: IChatListProps) {
   const router = useRouter();
   return (
     <View className="flex-1">
@@ -24,6 +25,7 @@ export default function ChatList({ users }: IChatListProps) {
             noBorder={index + 1 === users.length}
             item={item}
             index={index}
+            currentUser={currentUser}
           />
         )}
       />

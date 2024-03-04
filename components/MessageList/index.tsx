@@ -1,17 +1,34 @@
 import React from "react";
-import { Text, View } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import ChatRoomHeader from "@/components/Header/ChatRoomHeader";
+import { ScrollView } from "react-native";
+import { Message } from "@/types/message";
+import MessageItem from "../MessageItem";
 
 interface IMessageListProps {
-  messages?: [];
+  messages: [];
+  currentUser: [];
+  scrollViewRef: unknown;
 }
 
-export default function MessageList({ messages }: IMessageListProps) {
+export default function MessageList({
+  messages,
+  currentUser,
+  scrollViewRef,
+}: IMessageListProps) {
   return (
-    <View className="">
-      <Text>MessageList</Text>
-    </View>
+    <ScrollView
+      ref={scrollViewRef}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingTop: 10 }}
+    >
+      {messages?.map((message, index) => {
+        return (
+          <MessageItem
+            message={message}
+            key={index}
+            currentUser={currentUser}
+          />
+        );
+      })}
+    </ScrollView>
   );
 }
