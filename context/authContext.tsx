@@ -86,6 +86,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       console.log(response.user, "usuario login");
       return { success: true };
     } catch (error) {
+      console.log(error, "erro login");
       let msg = error.message;
 
       if (msg.includes("(auth/invalid-email)")) msg = "E-mail inválido";
