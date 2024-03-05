@@ -16,7 +16,6 @@ export default function ChatList({ users, currentUser }: IChatListProps) {
       <FlatList
         data={users}
         contentContainerStyle={{ flex: 1, paddingVertical: 25 }}
-        // keyExtractor={(item) => Math.random()}
         keyExtractor={(item, index) => index.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (

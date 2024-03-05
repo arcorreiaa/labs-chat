@@ -1,9 +1,15 @@
 import { Alert } from "react-native";
+import Toast from "react-native-toast-message";
 
 export const validatorEmailAndPassword = (email: string, password: string) => {
   if (!email || !password) {
-    Alert.alert("Por favor, preencha todos os campos!");
-    return;
+    Toast.show({
+      type: "error",
+      text1: "Por favor, preencha todos os campos!",
+      position: "top",
+      topOffset: 70,
+    });
+    return true;
   }
 };
 
@@ -14,7 +20,12 @@ export const validatorRegister = (
   profile: string
 ) => {
   if (!email || !password || !userName || !profile) {
-    Alert.alert("Por favor, preencha todos os campos!");
-    return;
+    Toast.show({
+      type: "error",
+      text1: "Por favor, preencha todos os campos!",
+      position: "top",
+      topOffset: 70,
+    });
+    return true;
   }
 };

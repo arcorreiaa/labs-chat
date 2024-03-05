@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Alert, Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { Octicons } from "@expo/vector-icons";
 import CustomButton from "@/components/Button";
 import { useRouter } from "expo-router";
@@ -10,6 +10,7 @@ import CustomKeyboardView from "@/components/Keyboard";
 import { useAuth } from "@/context/authContext";
 import { handleUnavailable } from "@/utils/commons";
 import { StatusBar } from "expo-status-bar";
+import Toast from "react-native-toast-message";
 
 export default function SignIn() {
   const { login } = useAuth();
@@ -19,7 +20,14 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
 
   const onLogin = async () => {
-    validatorEmailAndPassword(emailRef.current, passwordRef.current);
+    const areFieldsValid = validatorEmailAndPassword(
+      emailRef.current,
+      passwordRef.current
+    );
+
+    if (areFieldsValid) {
+      return;
+    }
 
     setLoading(true);
 
@@ -28,7 +36,12 @@ export default function SignIn() {
     setLoading(false);
 
     if (!response.success) {
-      Alert.alert("Erro ao entrar na conta", response.msg);
+      Toast.show({
+        type: "error",
+        text1: `Erro ao entrar na conta! ${response.msg}`,
+        position: "top",
+        topOffset: 70,
+      });
     }
   };
 
@@ -38,7 +51,7 @@ export default function SignIn() {
 
       <View
         className="flex-1 gap-12"
-        style={{ paddingTop: 16, paddingHorizontal: 10 }}
+        style={{ paddingTop: 40, paddingHorizontal: 10 }}
       >
         <View className="items-center flex mt-10">
           <Image
@@ -58,6 +71,7 @@ export default function SignIn() {
               onChangeText={(value) => (emailRef.current = value)}
               placeholder="E-mail"
               icon={<Octicons name="mail" size={20} color="gray" />}
+              inputMode="email"
             />
 
             <View className="gap-3">
@@ -98,6 +112,7 @@ export default function SignIn() {
           </View>
         </View>
       </View>
+      <Toast />
     </CustomKeyboardView>
   );
 }

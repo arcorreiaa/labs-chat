@@ -65,3 +65,28 @@ export interface ICurrentUser {
   userId: string;
   username: string;
 }
+
+export interface IUserDto {
+  _redirectEventId?: string;
+  apiKey: string;
+  appName: string;
+  createdAt: string;
+  displayName?: string;
+  email: string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  lastLoginAt: string;
+  phoneNumber?: string;
+  photoURL?: string;
+  providerData: unknown[];
+  stsTokenManager: {
+    accessToken: string;
+    expirationTime: number;
+    refreshToken: string;
+  };
+  tenantId?: string;
+  uid: string;
+  username: string;
+  profileUrl: string;
+  userId: string;
+}

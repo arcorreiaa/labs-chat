@@ -3,7 +3,7 @@ import { Alert, Pressable, Text, TouchableOpacity, View } from "react-native";
 import { Router, Stack } from "expo-router";
 import { Entypo, Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
-import { handleUnavailable } from "@/utils/commons";
+import { defaultImage, handleUnavailable } from "@/utils/commons";
 
 interface IChatRoomHeader {
   useItem: unknown;
@@ -27,7 +27,9 @@ export default function ChatRoomHeader({ router, useItem }: IChatRoomHeader) {
 
             <View className="flex-row item-center gap-3">
               <Image
-                source={useItem?.profileUrl}
+                source={
+                  useItem?.profileUrl ? useItem?.profileUrl : defaultImage
+                }
                 style={{ height: 30, width: 30, borderRadius: 15 }}
               />
             </View>

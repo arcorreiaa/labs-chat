@@ -1,7 +1,7 @@
 import { db } from "@/firebaseConfig";
 import { ICreatedAt } from "@/types/message";
 import { ICurrentUser, IUser } from "@/types/user";
-import { blurhash, formatDate, getRoomId } from "@/utils/commons";
+import { blurhash, defaultImage, formatDate, getRoomId } from "@/utils/commons";
 import { Image } from "expo-image";
 import { Router } from "expo-router";
 import {
@@ -89,7 +89,7 @@ export default function ChatItem({
     >
       <Image
         style={{ height: 40, width: 40, borderRadius: 20 }}
-        source={{ uri: item?.profileUrl }}
+        source={{ uri: item?.profileUrl ? item?.profileUrl : defaultImage }}
         placeholder={blurhash}
         transition={500}
       />

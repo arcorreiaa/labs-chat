@@ -13,33 +13,9 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { IUserDto } from "@/types/user";
 
 type AuthState = boolean | undefined;
-
-interface IUserDto {
-  _redirectEventId?: string;
-  apiKey: string;
-  appName: string;
-  createdAt: string;
-  displayName?: string;
-  email: string;
-  emailVerified: boolean;
-  isAnonymous: boolean;
-  lastLoginAt: string;
-  phoneNumber?: string;
-  photoURL?: string;
-  providerData: unknown[];
-  stsTokenManager: {
-    accessToken: string;
-    expirationTime: number;
-    refreshToken: string;
-  };
-  tenantId?: string;
-  uid: string;
-  username: string;
-  profileUrl: string;
-  userId: string;
-}
 
 interface IAuthContext {
   user: IUserDto | null;
@@ -77,7 +53,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      // console.log(user, "informacoes aqui ");
       if (user) {
         setIsAuthenticated(true);
         setUser(user as unknown as IUserDto);
@@ -159,6 +134,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
       if (msg.includes("(auth/email-already-in-use)")) {
         msg = "Este email já está em uso!";
+      }
+
+      if (msg.includes("auth/weak-password")) {
+        msg = "Senha menor que 6 caracteres!";
       }
 
       return { success: false, msg };
