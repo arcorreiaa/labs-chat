@@ -32,6 +32,8 @@ Aplicativo de bate-papo simples, com autenticação e criação de conta.
 
 ❌ - Ligação por voz.
 
+❌ - Notificação em segundo plano quando recebe uma mensagem.
+
 ## Modo de uso
 
 ⚠️ - Entrar no Link [Download](https://qr.codes/MYUJ3d).
